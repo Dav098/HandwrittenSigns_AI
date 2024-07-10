@@ -1,0 +1,52 @@
+<MyPaintWidget>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1  # Set background color to black
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    paint_widget: paint_widget
+    buttons_layout: buttons_layout
+    hold_button: hold_button
+
+    PaintWidget:
+        id: paint_widget
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1  # Set brush color to white
+
+    BoxLayout:
+        id: buttons_layout
+        orientation: 'horizontal'
+        size_hint: 1, None
+        height: 100
+        padding: 10
+
+        Button:
+            text: 'Clear'
+            size_hint_y: None
+            size_hint_x: 0.5
+            weight: 1
+            on_release: root.clear_canvas(self)
+
+        Button:
+            text: 'Save image'
+            size_hint_y: None
+            size_hint_x: 0.5
+            weight: 1
+            on_release: root.save_canvas(self)
+
+        HoldButton:
+            id: hold_button
+            text: 'Hold 5s to run learning'
+            size_hint_y: None
+            size_hint_x: 0.5
+            weight: 1
+
+        Button:
+            text: 'Predict number'
+            size_hint_y: None
+            size_hint_x: 0.5
+            weight: 1
+            on_release: root.predict(self)
